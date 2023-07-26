@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePageNum, fetchCharacters } from "../redux/charactersSlice";
 import Pagination from 'react-bootstrap/Pagination';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import CharCard from "../components/CharCard";
+
 
 export const CharactersPage = () => {
     const active = useSelector(state => state.characters.currentPage)
@@ -48,14 +48,7 @@ export const CharactersPage = () => {
         <h1>Characters</h1>
         <div className="characters-grid">
           {characters.map((character) => (
-            <div key={character.id} className="product-card">
-              <img src={character.image} alt={character.name} />
-              <h2>{character.name}</h2>
-              {/* <button onClick={() => dispatch(addToCart(product))}>
-                  Add to cart
-                </button> */}
-              <Link to={`/character/${character.id}`}>Go to character</Link>
-            </div>
+           <CharCard key={character.id} charName={character.name} species={character.species} id={character.id} image={character.image} />
           ))}
         </div>
         <Pagination data-bs-theme={theme}>{pageNumArray}</Pagination>

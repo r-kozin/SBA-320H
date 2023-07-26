@@ -10,9 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 function TopNavbar() {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme)
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme={theme}>
       <Container fluid>
         <Navbar.Brand href="#">Rick and Morty</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
