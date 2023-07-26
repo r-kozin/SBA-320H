@@ -39,6 +39,7 @@ const charactersSlice = createSlice({
     status: "idle",
     pageChangeStatus: "idle",
     error: null,
+    pageChangeError: null,
   },
   reducers: {
     updatePageNum: (state, action) => {
@@ -60,14 +61,17 @@ const charactersSlice = createSlice({
       })
       .addCase(fetchCharacterPage.pending, (state) => {
         state.pageChangeStatus = "loading";
+        state.status = "loading";
       })
       .addCase(fetchCharacterPage.fulfilled, (state, action) => {
         state.pageChangeStatus = "succeeded";
+        state.status = "succeeded";
         state.characters = action.payload;
       })
       .addCase(fetchCharacterPage.rejected, (state, action) => {
         state.pageChangeStatus = "failed";
-        state.error = action.error.message;
+        state.status = "failed";
+        state.pageChangeError = action.error.message;
       });
   },
 });

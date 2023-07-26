@@ -42,6 +42,7 @@ function TopNavbar() {
               id="custom-switch"
               label="Toggle theme"
               onClick={() => dispatch(toggleTheme())}
+              className={theme}
             />
           </Form>
         </Navbar.Collapse>

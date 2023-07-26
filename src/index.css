@@ -67,3 +67,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.dark > label{
+  color: rgba(255, 255, 255, 0.55)
+}
+.light > label{
+  color: rgba(0, 0, 0, 0.65)
+}
