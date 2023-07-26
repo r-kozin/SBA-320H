@@ -2,29 +2,21 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePageNum, fetchCharacters } from "../redux/charactersSlice";
-import Pagination from 'react-bootstrap/Pagination';
 import CharCard from "../components/CharCard";
+import PaginationComponent from "../components/PaginationComponent";
 
 
 export const CharactersPage = () => {
     const active = useSelector(state => state.characters.currentPage)
     const theme = useSelector(state => state.theme.theme)
-    // const pageCount = useSelector(state => state.characters.characters.info.pages) <-- getting error selecting number of pages
     // console.log(pageCount);
     
     function handlePageChange(number){
         dispatch(updatePageNum(number))
     }
 
-    let pageNumArray = [];
 
-    for (let number = 1; number <= 42; number++) { //hard coding 42 pages for now
-        pageNumArray.push(
-          <Pagination.Item key={number} active={number === active} onClick={() => handlePageChange(number)}>
-            {number}
-          </Pagination.Item>,
-        );
-      }
+
   const dispatch = useDispatch();
   const characters = useSelector(
     (state) => state.characters.characters.results
@@ -43,6 +35,7 @@ export const CharactersPage = () => {
   } else if (status === "failed") {
     content = <div>Error loading characters</div>;
   } else if (status === "succeeded") {
+
     content = (
       <div>
         <h1>Characters</h1>
@@ -51,7 +44,7 @@ export const CharactersPage = () => {
            <CharCard key={character.id} charName={character.name} species={character.species} id={character.id} image={character.image} />
           ))}
         </div>
-        <Pagination data-bs-theme={theme}>{pageNumArray}</Pagination>
+        <PaginationComponent />
       </div>
     );
   }
