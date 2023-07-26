@@ -36,3 +36,6 @@ const charactersSlice = createSlice({
   export const { updatePageNum } = charactersSlice.actions;
 
 export default charactersSlice.reducer;
+
+export const selectCharacterByID = (state, charId) =>
+  state.characters.characters.results.find((character) => character.id == charId)

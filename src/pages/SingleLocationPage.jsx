@@ -10,6 +10,8 @@ export const SingleLocationPage = ({ match }) => {
     const location = useSelector((state) => selectLocationByName(state, locationName))
     console.log(location);
 
+    
+
   return (
     <div className="single-location-container">
         <h3>{location.name}</h3>
