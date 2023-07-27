@@ -13,7 +13,7 @@ function TopNavbar() {
   const theme = useSelector((state) => state.theme.theme)
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme={theme}>
+    <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand href="/">Rick and Morty</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -23,9 +23,9 @@ function TopNavbar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/characters">Characters</Nav.Link>
-            <Nav.Link href="/locations">Locations</Nav.Link>
+           <Nav.Link as={Link} to={'/'}>Home</Nav.Link>
+            <Nav.Link as={Link} to={'/characters'}>Characters</Nav.Link>
+            <Nav.Link as={Link} to={'/locations'}>Locations</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
@@ -42,7 +42,6 @@ function TopNavbar() {
               id="custom-switch"
               label="Toggle theme"
               onClick={() => dispatch(toggleTheme())}
-              className={theme}
             />
           </Form>
         </Navbar.Collapse>

@@ -1,29 +1,104 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectCharacterByID } from '../redux/charactersSlice'
-import { useParams } from 'react-router-dom'
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCharacterByID } from "../redux/charactersSlice";
+import { selectEpisodeByID } from "../redux/episodesSlice";
+import { useParams } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Accordion from "react-bootstrap/Accordion";
 
 export const SingleCharacterPage = ({ match }) => {
-    const { charId } = useParams()
-    console.log(charId);
-    const singleCharacter = useSelector((state) => selectCharacterByID(state, charId)) //will only work for characters already in state (first page by default)
-    console.log(singleCharacter);
+  const dispatch = useDispatch();
+  const { charId } = useParams();
+  console.log(charId);
+  const singleCharacter = useSelector((state) =>
+    selectCharacterByID(state, charId)
+  ); //will only work for characters already in state (first page by default)
+  console.log(singleCharacter);
+  const epStatus = useSelector((state) => state.episodes.epStatus);
+  const singleEpisode = useSelector((state) => state.episodes.episodes.results);
+  
+  function getCharEpisodes(){
+    for (let i = 0; i < singleCharacter.episode.length; i++) {
+      let url = singleCharacter.episode[i];
+      let id = url.split("episode/")[1];
+      console.log(id);
+    }
+  }
 
-    
+  let content;
+  if (epStatus === "loading") {
+    content = <div>Loading...</div>;
+  } else if (epStatus === "failed") {
+    content = <div>Error loading episodes</div>;
+  } else if (epStatus === "succeeded") {
+    if (Array.isArray(singleEpisode)) {
+    console.log(singleEpisode);
+    content = singleEpisode.map((episode) => (
+      <Card key={episode.id} style={{ width: "18rem" }}>
+        <Card.Body>
+          <Card.Title>{episode.name}</Card.Title>
+          <Card.Subtitle>{episode.episode}</Card.Subtitle>
+          <Card.Text>Original Air Date: {episode.air_date}</Card.Text>
+          <Card.Link href="#">Go to Episode</Card.Link>
+        </Card.Body>
+      </Card>
+    ));
+    } else {
+      content = (
+        <Card key={singleEpisode.id} style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title>{singleEpisode.name}</Card.Title>
+            <Card.Subtitle>{singleEpisode.episode}</Card.Subtitle>
+            <Card.Text>Original Air Date: {singleEpisode.air_date}</Card.Text>
+            <Card.Link href="#">Go to Episode</Card.Link>
+          </Card.Body>
+        </Card>)
+    }
+  }
 
   return (
     <div className="single-character-container">
-              <img src={singleCharacter.image} alt={singleCharacter.name} />
-              <h2>{singleCharacter.name}</h2>
-        <h3>Status: {singleCharacter.status}</h3>
-        <h3>Species: {singleCharacter.species}</h3>
-        <h3>Gender: {singleCharacter.gender}</h3>
-        <h3>Origin: {singleCharacter.origin.name}</h3>
-        <h3>Last Known Location: {singleCharacter.location.name}</h3>
-        <h3>Episodes: {singleCharacter.episode}</h3>
+      <div className="char-card-container">
+        <Card style={{ width: "18rem" }}>
+          <Card.Img
+            variant="top"
+            src={singleCharacter.image}
+            alt={singleCharacter.name}
+          />
+          <Card.Body>
+            <Card.Title>{singleCharacter.name}</Card.Title>
+            <Card.Text>
+              Featured in: {singleCharacter.episode.length} episodes
+            </Card.Text>
+          </Card.Body>
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item className="status-box">Status:     <span className={`status-indicator-${singleCharacter.status}`} />{singleCharacter.status}</ListGroup.Item>
+            <ListGroup.Item>Species: {singleCharacter.species}</ListGroup.Item>
+            <ListGroup.Item>Gender: {singleCharacter.gender}</ListGroup.Item>
+            <ListGroup.Item>
+              Origin: {singleCharacter.origin.name}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Last Known Location: {singleCharacter.location.name}
+            </ListGroup.Item>
+          </ListGroup>
+          <Card.Body>
+            <Card.Link href="#">Card Link</Card.Link>
+            <Card.Link href="#">Another Link</Card.Link>
+          </Card.Body>
+        </Card>
+      </div>
+      <div className="episode-list">
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Episodes</Accordion.Header>
+            <Accordion.Body><div className="epCards">{content}</div></Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleCharacterPage
+export default SingleCharacterPage;

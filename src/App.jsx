@@ -8,6 +8,8 @@ import SingleCharacterPage from './pages/SingleCharacterPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import './styles/CharactersPage.css';
+import './styles/TopNavbar.css';
+import './styles/SingleCharacterPage.css';
 import TopNavbar from './TopNavbar.jsx'
 import { useSelector } from 'react-redux/es/hooks/useSelector'
 

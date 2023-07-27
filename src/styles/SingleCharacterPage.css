@@ -1,0 +1,46 @@
+.single-character-container{
+    display: flex;
+}
+.epCards{
+    display: flex;
+    flex-wrap: wrap;
+}
+.card{
+    margin: 1rem;
+}
+.episode-list{
+    margin-top: 1rem;
+}
+.status-indicator-Dead{
+    display: block;
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-right: 0.375rem;
+    margin-left: 0.375rem;
+    background: rgb(214, 61, 46);
+    border-radius: 50%;
+}
+.status-indicator-Alive{
+    display: block;
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-right: 0.375rem;
+    margin-left: 0.375rem;
+    background: rgb(1, 151, 1);
+    border-radius: 50%;
+}
+.status-indicator-unknown{
+    display: block;
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-right: 0.375rem;
+    margin-left: 0.375rem;
+    background: rgb(194, 194, 194);
+    border-radius: 50%;
+}
+.status-box{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    text-transform: capitalize;
+}

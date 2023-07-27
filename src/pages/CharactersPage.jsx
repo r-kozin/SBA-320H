@@ -41,7 +41,7 @@ export const CharactersPage = () => {
         <h1>Characters</h1>
         <div className="characters-grid">
           {characters.map((character) => (
-           <CharCard key={character.id} charName={character.name} species={character.species} id={character.id} image={character.image} />
+           <CharCard key={character.id} charName={character.name} species={character.species} id={character.id} image={character.image} episode={character.episode}/>
           ))}
         </div>
         <PaginationComponent />
