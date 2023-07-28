@@ -12,6 +12,7 @@ import './styles/TopNavbar.css';
 import './styles/SingleCharacterPage.css';
 import TopNavbar from './TopNavbar.jsx'
 import { useSelector } from 'react-redux/es/hooks/useSelector'
+import { Search } from './pages/Search'
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/character/:charId" element={<SingleCharacterPage />} />
       <Route path="/locations" element={<LocationsPage />} />
       <Route path="/location/:locationName" element={<SingleLocationPage />} />
+      <Route path="/search" element={<Search />} />
 
     </Routes>
     </div>

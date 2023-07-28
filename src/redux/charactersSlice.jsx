@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchCharacters = createAsyncThunk(
@@ -45,6 +45,9 @@ const charactersSlice = createSlice({
     updatePageNum: (state, action) => {
       state.currentPage = action.payload;
     },
+    updateCharacters: (state, action) => {
+      state.characters = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -72,6 +75,10 @@ const charactersSlice = createSlice({
         state.pageChangeStatus = "failed";
         state.status = "failed";
         state.pageChangeError = action.error.message;
+      })
+      .addCase("search/fetchResults/fulfilled", (state, action) => {
+        // Update charactersSlice's characters with the data from the payload
+        state.characters = action.payload;
       });
   },
 });

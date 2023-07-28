@@ -20,7 +20,7 @@ export default function CharCard(character) {
     } //get array of all episode id's character is features in
     let charEpIds = epIds.join(","); //join array and dispatch to fetch episode to get all eps in one api call
     console.log(charEpIds);
-    dispatch(fetchSingleEpisode(charEpIds));
+    dispatch(fetchSingleEpisode(charEpIds)); //get all eps in one api call
     navigate(`/character/${character.id}`) //go to single character page
   }
 

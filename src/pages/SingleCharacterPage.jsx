@@ -17,7 +17,8 @@ export const SingleCharacterPage = ({ match }) => {
   console.log(singleCharacter);
   const epStatus = useSelector((state) => state.episodes.epStatus);
   const singleEpisode = useSelector((state) => state.episodes.episodes.results);
-  
+
+
   function getCharEpisodes(){
     for (let i = 0; i < singleCharacter.episode.length; i++) {
       let url = singleCharacter.episode[i];
