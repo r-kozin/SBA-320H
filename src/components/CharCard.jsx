@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchSingleEpisode } from "../redux/episodesSlice";
+import { fetchSpecificResident, selectCharacterByID } from "../redux/charactersSlice";
 
 export default function CharCard(character) {
   const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
 
   function getCharEpIds(){
     let epIds = [];
@@ -21,8 +23,9 @@ export default function CharCard(character) {
     let charEpIds = epIds.join(","); //join array and dispatch to fetch episode to get all eps in one api call
     console.log(charEpIds);
     dispatch(fetchSingleEpisode(charEpIds)); //get all eps in one api call
+    dispatch(fetchSpecificResident(character.id));
     navigate(`/character/${character.id}`) //go to single character page
-  }
+}
 
   function handleClick(event) {
     event.preventDefault();

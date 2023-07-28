@@ -21,6 +21,28 @@ export const fetchCharacterPage = createAsyncThunk(
   }
 );
 
+export const fetchResidents = createAsyncThunk(
+  "characters/fetchResidents",
+  async (residentIds) => {
+    const response = await axios.get(
+      `https://rickandmortyapi.com/api/character/${residentIds}`
+    );
+    return response.data;
+  }
+);
+
+export const fetchSpecificResident = createAsyncThunk(
+  "characters/fetchSpecificResident",
+  async (id) => {
+    const response = await axios.get(
+      `https://rickandmortyapi.com/api/character/${id}`
+    );
+    return response.data;
+  }
+);
+
+
+
 const charactersSlice = createSlice({
   name: "characters",
   initialState: {
@@ -32,11 +54,21 @@ const charactersSlice = createSlice({
           next: "",
           prev: null,
         },
-        results: [],
+        results: [{id:6,
+          name:"Abadango Cluster Princess",
+          status:"Alive",
+          species:"Alien",
+          type:"",
+          gender:"Female",
+          image:"https://rickandmortyapi.com/api/character/avatar/6.jpeg",
+          url:"https://rickandmortyapi.com/api/character/6",
+          created:"2017-11-04T19:50:28.250Z"}],
       },
     ],
+    residents: [],
     currentPage: 1,
     status: "idle",
+    residentStatus: "idle",
     pageChangeStatus: "idle",
     error: null,
     pageChangeError: null,
@@ -79,6 +111,28 @@ const charactersSlice = createSlice({
       .addCase("search/fetchResults/fulfilled", (state, action) => {
         // Update charactersSlice's characters with the data from the payload
         state.characters = action.payload;
+      })
+      .addCase(fetchResidents.pending, (state) => {
+        state.residentStatus = "loading";
+      })
+      .addCase(fetchResidents.fulfilled, (state, action) => {
+        state.residentStatus = "succeeded";
+        state.residents = action.payload;
+      })
+      .addCase(fetchResidents.rejected, (state, action) => {
+        state.residentStatus = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(fetchSpecificResident.pending, (state) => {
+        state.residentStatus = "loading";
+      })
+      .addCase(fetchSpecificResident.fulfilled, (state, action) => {
+        state.residentStatus = "succeeded";
+        state.characters.results = state.characters.results.concat(action.payload);
+      })
+      .addCase(fetchSpecificResident.rejected, (state, action) => {
+        state.residentStatus = "failed";
+        state.error = action.error.message;
       });
   },
 });
