@@ -25,6 +25,8 @@ function TopNavbar() {
             <Nav.Link as={Link} to={'/characters'}>Characters</Nav.Link>
             <Nav.Link as={Link} to={'/locations'}>Locations</Nav.Link>
             <Nav.Link as={Link} to={'/search'}>Search</Nav.Link>
+            <Nav.Link as={Link} to={'/episodes'}>Episodes</Nav.Link>
+
           </Nav>
           <Form className="theme-container">
             <Form.Check // prettier-ignore

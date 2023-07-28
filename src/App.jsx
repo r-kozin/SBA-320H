@@ -10,9 +10,12 @@ import './styles/App.css';
 import './styles/CharactersPage.css';
 import './styles/TopNavbar.css';
 import './styles/SingleCharacterPage.css';
+import './styles/EpisodesPage.css';
 import TopNavbar from './TopNavbar.jsx'
 import { useSelector } from 'react-redux/es/hooks/useSelector'
 import { Search } from './pages/Search'
+import { EpisodesPage } from './pages/EpisodesPage'
+import SingleEpisodePage from './pages/SingleEpisodePage'
 
 
 
@@ -22,7 +25,7 @@ function App() {
   return (
   <Router>
   <TopNavbar />
-  <div className={`App ${theme}`}>
+  <div className={`App`}>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/characters" element={<CharactersPage />} />
@@ -30,6 +33,8 @@ function App() {
       <Route path="/locations" element={<LocationsPage />} />
       <Route path="/location/:locationName" element={<SingleLocationPage />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/episodes" element={<EpisodesPage />} />
+      <Route path="/episode/:epId" element={<SingleEpisodePage />} />
 
     </Routes>
     </div>

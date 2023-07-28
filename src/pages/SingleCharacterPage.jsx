@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCharacterByID } from "../redux/charactersSlice";
 import { selectEpisodeByID } from "../redux/episodesSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Accordion from "react-bootstrap/Accordion";
@@ -41,7 +41,7 @@ export const SingleCharacterPage = ({ match }) => {
           <Card.Title>{episode.name}</Card.Title>
           <Card.Subtitle>{episode.episode}</Card.Subtitle>
           <Card.Text>Original Air Date: {episode.air_date}</Card.Text>
-          <Card.Link href="#">Go to Episode</Card.Link>
+          <Card.Link as={Link} to={`/episode/${episode.id}`}>Go to Episode</Card.Link>
         </Card.Body>
       </Card>
     ));
@@ -52,7 +52,7 @@ export const SingleCharacterPage = ({ match }) => {
             <Card.Title>{singleEpisode.name}</Card.Title>
             <Card.Subtitle>{singleEpisode.episode}</Card.Subtitle>
             <Card.Text>Original Air Date: {singleEpisode.air_date}</Card.Text>
-            <Card.Link href="#">Go to Episode</Card.Link>
+            <Card.Link as={Link} to={`/episode/${singleEpisode.id}`}>Go to Episode</Card.Link>
           </Card.Body>
         </Card>)
     }
