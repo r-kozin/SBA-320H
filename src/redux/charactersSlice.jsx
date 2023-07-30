@@ -41,8 +41,6 @@ export const fetchSpecificResident = createAsyncThunk(
   }
 );
 
-
-
 const charactersSlice = createSlice({
   name: "characters",
   initialState: {
@@ -54,15 +52,19 @@ const charactersSlice = createSlice({
           next: "",
           prev: null,
         },
-        results: [{id:6,
-          name:"Abadango Cluster Princess",
-          status:"Alive",
-          species:"Alien",
-          type:"",
-          gender:"Female",
-          image:"https://rickandmortyapi.com/api/character/avatar/6.jpeg",
-          url:"https://rickandmortyapi.com/api/character/6",
-          created:"2017-11-04T19:50:28.250Z"}],
+        results: [
+          {
+            id: 6,
+            name: "Abadango Cluster Princess",
+            status: "Alive",
+            species: "Alien",
+            type: "",
+            gender: "Female",
+            image: "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
+            url: "https://rickandmortyapi.com/api/character/6",
+            created: "2017-11-04T19:50:28.250Z",
+          },
+        ],
       },
     ],
     residents: [],
@@ -128,7 +130,13 @@ const charactersSlice = createSlice({
       })
       .addCase(fetchSpecificResident.fulfilled, (state, action) => {
         state.residentStatus = "succeeded";
-        state.characters.results = state.characters.results.concat(action.payload);
+        const charExists = state.characters.results.some(c => c.id === action.payload.id);
+        if (charExists) {
+          console.log("char already exists");
+        }else {
+        state.characters.results = state.characters.results.concat(
+          action.payload
+        );}
       })
       .addCase(fetchSpecificResident.rejected, (state, action) => {
         state.residentStatus = "failed";
