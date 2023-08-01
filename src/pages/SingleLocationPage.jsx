@@ -29,10 +29,6 @@ useEffect(() => {
   dispatch(fetchResidents(locResIds))
 }, [location]);
 
-function isObject(objValue) {
-  return objValue && typeof objValue === 'object' && objValue.constructor === Object;
-}
-
   let content;
   if (status === "loading") {
     content = <div>Loading...</div>;

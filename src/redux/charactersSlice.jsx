@@ -27,6 +27,8 @@ export const fetchResidents = createAsyncThunk(
     const response = await axios.get(
       `https://rickandmortyapi.com/api/character/${residentIds}`
     );
+    console.log(response.data);
+    console.log('fetching residents');
     return response.data;
   }
 );
@@ -120,6 +122,7 @@ const charactersSlice = createSlice({
       .addCase(fetchResidents.fulfilled, (state, action) => {
         state.residentStatus = "succeeded";
         state.residents = action.payload;
+        console.log(action.payload);
       })
       .addCase(fetchResidents.rejected, (state, action) => {
         state.residentStatus = "failed";

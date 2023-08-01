@@ -21,6 +21,16 @@ export const fetchSingleEpisode = createAsyncThunk(
   }
 );
 
+export const fetchEpisodePage = createAsyncThunk(
+  "episode/fetchEpisodePage",
+  async (pageNumber) => {
+    const response = await axios.get(
+      `https://rickandmortyapi.com/api/episode/?page=${pageNumber}`
+    );
+    return response.data;
+  }
+);
+
 const episodesSlice = createSlice({
   name: "episodes",
   initialState: {
@@ -36,6 +46,7 @@ const episodesSlice = createSlice({
     currentPage: 1,
     status: "idle",
     epStatus: "idle",
+    pageChangeStatus: "idle",
     error: null,
     pageChangeError: null,
   },
@@ -68,6 +79,20 @@ const episodesSlice = createSlice({
       .addCase(fetchSingleEpisode.rejected, (state, action) => {
         state.epStatus = "failed";
         state.epStatus = action.error.message;
+      })
+      .addCase(fetchEpisodePage.pending, (state) => {
+        state.pageChangeStatus = "loading";
+        state.status = "loading";
+      })
+      .addCase(fetchEpisodePage.fulfilled, (state, action) => {
+        state.pageChangeStatus = "succeeded";
+        state.status = "succeeded";
+        state.episodes = action.payload;
+      })
+      .addCase(fetchEpisodePage.rejected, (state, action) => {
+        state.pageChangeStatus = "failed";
+        state.status = "failed";
+        state.pageChangeError = action.error.message;
       });
   },
 });

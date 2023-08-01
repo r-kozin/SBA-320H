@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEpisodes } from '../redux/episodesSlice';
+import { fetchEpisodePage, fetchEpisodes, updateEpisodePageNum } from '../redux/episodesSlice';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Pagination } from 'react-bootstrap';
 
 export const EpisodesPage = () => {
     const dispatch = useDispatch();
@@ -10,6 +11,14 @@ export const EpisodesPage = () => {
       (state) => state.episodes.episodes.results
     );
     const epStatus = useSelector((state) => state.episodes.status);
+    const active = useSelector((state) => state.episodes.currentPage);
+    const pageCount = useSelector((state) => state.episodes.episodes.info.pages);
+
+    function handlePageChange(newPage) {
+      dispatch(fetchEpisodePage(newPage));
+      dispatch(updateEpisodePageNum(newPage));
+      console.log("handling page change");
+    }
   
     useEffect(() => {
       if (epStatus === "idle") {
@@ -47,11 +56,29 @@ export const EpisodesPage = () => {
           </Card>)
       }
     }
+
+    let items = [];
+    for (let number = 1; number <= pageCount; number++) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={number === active}
+          onClick={() => handlePageChange(number)}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+
   
     return (
       <>
         <h1>Episodes</h1>
         <div className='episodes-grid'>{content}</div>
+        <div>
+        <Pagination>{items}</Pagination>
+        <br />
+      </div>
       </>
     );
   };
