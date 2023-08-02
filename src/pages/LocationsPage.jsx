@@ -67,7 +67,7 @@ export const LocationsPage = () => {
     <>
       <div>{content}</div>
       <div>
-        <Pagination>{items}</Pagination>
+        <Pagination style={{justifyContent: "center"}}>{items}</Pagination>
         <br />
       </div>
     </>

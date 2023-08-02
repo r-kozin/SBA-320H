@@ -76,7 +76,7 @@ export const EpisodesPage = () => {
         <h1>Episodes</h1>
         <div className='episodes-grid'>{content}</div>
         <div>
-        <Pagination>{items}</Pagination>
+        <Pagination style={{justifyContent: "center"}}>{items}</Pagination>
         <br />
       </div>
       </>
