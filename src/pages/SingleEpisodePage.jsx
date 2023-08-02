@@ -74,10 +74,6 @@ if (status === "loading") {
               Characters featured in this episode: {episode.characters.length}
             </ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
-          </Card.Body>
         </Card>
       </div>
       <div className="episode-list">
@@ -149,10 +145,6 @@ if (status === "loading") {
             Characters featured in this episode: {singleEpisode.characters.length}
           </ListGroup.Item>
         </ListGroup>
-        <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
-        </Card.Body>
       </Card>
     </div>
     <div className="episode-list">
