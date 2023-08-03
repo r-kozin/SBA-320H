@@ -33,7 +33,7 @@ export const EpisodesPage = () => {
       content = <div>Error loading episodes</div>;
     } else if (epStatus === "succeeded") {
       if (Array.isArray(episodes)) {
-      console.log(episodes);
+      // console.log(episodes);
       content = episodes.map((episode) => (
         <Card key={episode.id} style={{ width: "18rem" }}>
           <Card.Body>

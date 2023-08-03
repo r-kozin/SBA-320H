@@ -9,14 +9,14 @@ import CharCard from "../components/CharCard";
 export const SingleLocationPage = ({ match }) => {
   const dispatch = useDispatch();
   const { locationName } = useParams();
-  console.log(locationName);
+  // console.log(locationName);
   const location = useSelector((state) =>
     selectLocationByName(state, locationName)
   );
-  console.log(location);
+  // console.log(location);
   const status = useSelector((state) => state.characters.residentStatus)
   const residents = useSelector((state) => state.characters.residents)
-  console.log(residents);
+  // console.log(residents);
 useEffect(() => {
   let resIds = [];
   for (let i = 0; i < location.residents.length; i++) {
@@ -25,7 +25,7 @@ useEffect(() => {
     resIds.push(epId)
   } //get array of all episode id's character is features in
   let locResIds = resIds.join(","); //join array and dispatch to fetch episode to get all eps in one api call
-  console.log(locResIds);
+  // console.log(locResIds);
   dispatch(fetchResidents(locResIds))
 }, [location]);
 

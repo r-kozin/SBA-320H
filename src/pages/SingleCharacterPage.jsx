@@ -10,11 +10,11 @@ import Accordion from "react-bootstrap/Accordion";
 export const SingleCharacterPage = ({ match }) => {
   const dispatch = useDispatch();
   const { charId } = useParams();
-  console.log(charId);
+  // console.log(charId);
   const singleCharacter = useSelector((state) =>
     selectCharacterByID(state, charId)
   ); //will only work for characters already in state (first page by default)
-  console.log(singleCharacter);
+  // console.log(singleCharacter);
 
 
   const epStatus = useSelector((state) => state.episodes.epStatus);
@@ -25,7 +25,7 @@ const resStatus = useSelector((state) => state.characters.residentStatus);
     for (let i = 0; i < singleCharacter.episode.length; i++) {
       let url = singleCharacter.episode[i];
       let id = url.split("episode/")[1];
-      console.log(id);
+      // console.log(id);
     }
   }
 
@@ -36,7 +36,7 @@ const resStatus = useSelector((state) => state.characters.residentStatus);
     content = <div>Error loading episodes</div>;
   } else if (epStatus === "succeeded") {
     if (Array.isArray(singleEpisode)) {
-      console.log(singleEpisode);
+      // console.log(singleEpisode);
       content = singleEpisode.map((episode) => (
         <Card key={episode.id} style={{ width: "18rem" }}>
           <Card.Body>

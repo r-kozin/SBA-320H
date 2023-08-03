@@ -8,19 +8,19 @@ import CharCard from "../components/CharCard";
 
 export const SingleEpisodePage = ({ match }) => {
   const { epId } = useParams();
-  console.log(epId);
+  // console.log(epId);
   const results = useSelector((state) => state.episodes.episodes.results);
-console.log(results.length);
+// console.log(results.length);
 const status = useSelector((state) => state.characters.residentStatus)
 const residents = useSelector((state) => state.characters.residents)
-console.log(residents);
+// console.log(residents);
 
 const dispatch = useDispatch();
 
 
 if (results.length > 1) {
   const episode = useSelector((state) => selectEpisodeByID(state, epId));
-  console.log(episode);
+  // console.log(episode);
 
   useEffect(() => {
 let epChars = [];
@@ -30,7 +30,7 @@ for (let i = 0; i < episode.characters.length; i++) {
   epChars.push(charId)
 } //get array of all character id's  featured in this episode
 let epCharIds = epChars.join(","); //join array and dispatch to fetch characters to get all chars in one api call
-console.log(epCharIds);
+// console.log(epCharIds);
 dispatch(fetchResidents(epCharIds));
   }, []);
 
@@ -101,7 +101,7 @@ if (status === "loading") {
         epChars.push(charId)
       } //get array of all character id's  featured in this episode
       let epCharIds = epChars.join(","); //join array and dispatch to fetch characters to get all chars in one api call
-      console.log(epCharIds);
+      // console.log(epCharIds);
       dispatch(fetchResidents(epCharIds));
         }, []);
 

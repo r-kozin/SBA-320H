@@ -19,18 +19,18 @@ export const Search = () => {
   const status = useSelector((state) => state.search.status);
   const searchResults = useSelector((state) => state.search.results.results);
 
-  console.log(searchFor);
+  // console.log(searchFor);
 
   function handleSearch(e) {
     e.preventDefault();
     if (charactersChecked.current.checked) {
       dispatch(fetchSearchResults(["character", searchFor.toString()]));
-      console.log(searchFor.toString());
+      // console.log(searchFor.toString());
     } else if (locationsChecked.current.checked) {
       console.log("locations");
     } else if (episodesChecked.current.checked) {
       console.log("episodes");
-    } else console.log("not working");
+    } else console.log("Error, no search type selected");
   }
 
   let content;
