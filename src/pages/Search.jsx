@@ -102,7 +102,7 @@ export const Search = () => {
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Search Options</Accordion.Header>
-              <Accordion.Body></Accordion.Body>
+              <Accordion.Body>Additional Filters to be added</Accordion.Body>
             </Accordion.Item>
           </Accordion>
           <Button variant="outline-success" onClick={handleSearch}>
